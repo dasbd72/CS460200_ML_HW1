@@ -1,0 +1,51 @@
+\documentclass[12pt, a4paper, UTF8]{article}
+\usepackage{ctex}
+\usepackage{graphicx}
+\usepackage[left=10mm, top=10mm, bottom=10mm, right=10mm]{geometry}
+\title{Machine Learning Homework 1}
+\author{林劭軒}
+\date{October 12}
+\pagestyle{empty}
+
+\begin{document}
+\begin{center} 
+\Large Machine Learning Homework 1
+\end{center} 
+\begin{center} 
+\small 109062131 林劭軒
+\end{center} 
+\section{Basic}
+\paragraph {}
+I created three different models for the cities, using temperature and previous cases as input. Each with different number and degree of terms. Note that each of the variables should be normalized using the mean, max, and min value of the input. $x_i$: temperature of the city at $i^{th}$ week, $y_i$: cases of the city at $i^{th}$ week.
+\paragraph {}
+Model A:
+$y_i = 50.47 - 10.50*x_i - 8.02*x_i^2 + 40.75*y_{i-2} + 27.79*y_{i-1}$
+\paragraph {}
+Model B:
+$y_i = 23.01 + 13.76*x_i + 0.82*x_i^2 -14.22*x_i^3 -1.27*y_{i-2} + 19.37*y_{i-1}$
+\paragraph {}
+Model C:
+$y_i = 37.3 -66.04*x_i -10.44*x_i^2 + 51.9*x_i^3 + 28.72*y_{i-2} + 11.65*y_{i-1}$
+\section{Advanced}
+\paragraph {}
+I used temperature, previous cases and precipitation my input. $x_i$: temperature of the city at $i^{th}$ week, $p_i$: precipitation of the city at $i^{th}$ week.
+\paragraph {}
+Model A:
+$y_i = 50.39 -5.19*x_i -0.66*p_i -4.58*x_i^2 + 2.88*p_i^2 -3.37*x_i^3 + 3.28*p_i^3 + 41.95*y_{i-2} + 28.80*y_{i-1} $
+\paragraph {}
+Model B:
+$y_i = 23.02 -0.45*x_i -0.62*p_i + 11.77*y_{i-2} + 0.79*y_{i-1} $
+\paragraph {}
+Model C:
+$y_i = 37.38 -73.24*x_i + 25.61*p_i -4.96*x_i^2 -27*p_i^2 + 64.47*x_i^3 + 6.2*p_i^3 + 12.45*y_{i-2} + 29.97*y_{i-1} $
+
+\section{Difficulty}
+\paragraph{}
+I initially trained my model using the classic gradient descent of linear regression. The result of X dot w is perfect, where X is the input and w is the coefficient. However, when using particular dataset, the predicted y using the same coefficient but doing row by row was dramatically increasing, which isn't normal.
+\section{Solution and Reflection}
+\paragraph{}
+My solution was to let the pred\_y used in gradient not only be X dot w but my prediction row by row. Though this method slows down my training process, it gets a good result.
+\paragraph{}
+I hope we can learn more details of what we need in our homework during class, and also the given data size was too small, and there's no obvious relation between the input and output, which causes the prediction could be only guessing the result and modifying the parameters.
+
+\end{document}

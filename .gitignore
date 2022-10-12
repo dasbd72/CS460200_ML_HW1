@@ -1,3 +1,6 @@
 venv
 *.xlsx
 .vscode
+hw1_report.*
+!hw1_report.pdf
+!hw1_report.tex
