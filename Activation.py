@@ -22,7 +22,12 @@ class Activation():
 
             ### PASTE YOUR CODE HERE ###
             ### START CODE HERE ###
-
+            def sigmoid(Z):
+                # return np.where(Z >= 0, 1 / (1 + np.exp(-Z)), np.exp(Z) / (1 + np.exp(Z)))
+                # return np.exp(-np.logaddexp(0, -Z))
+                return np.piecewise(Z.astype(np.float64), [Z >= 0], [lambda i: 1 / (1 + np.exp(-i)), lambda i: np.exp(i) / (1 + np.exp(i))])
+            A = sigmoid(Z)
+            self.cache = Z.copy()
             ### END CODE HERE ###
             
             return A
@@ -41,7 +46,12 @@ class Activation():
 
             ### PASTE YOUR CODE HERE ###
             ### START CODE HERE ###
-
+            def softmax(Z):
+                b = Z.max(axis=0)
+                exp = np.exp(Z - b)
+                return exp / exp.sum(axis=0)
+            A = softmax(Z)
+            self.cache = Z.copy()
             ### END CODE HERE ###
             
             return A
@@ -59,7 +69,8 @@ class Activation():
             
             ### PASTE YOUR CODE HERE ###
             ### START CODE HERE ###
-
+            A = np.maximum(Z, 0)
+            self.cache = Z.copy() 
             ### END CODE HERE ###
             
             assert(A.shape == Z.shape)
@@ -79,7 +90,10 @@ class Activation():
             
             ### PASTE YOUR CODE HERE ###
             ### START CODE HERE ###
-
+            def sigmoid(Z):
+                return np.piecewise(Z.astype(np.float64), [Z >= 0], [lambda i: 1 / (1 + np.exp(-i)), lambda i: np.exp(i) / (1 + np.exp(i))])
+            Z = self.cache
+            dZ = dA * sigmoid(Z) * (1 - sigmoid(Z))
             ### END CODE HERE ###
             
             assert (dZ.shape == Z.shape)
@@ -98,7 +112,9 @@ class Activation():
             
             ### PASTE YOUR CODE HERE ###
             ### START CODE HERE ### 
-
+            Z = self.cache
+            dZ = dA # just converting dz to a correct object. 
+            dZ[Z <= 0] = 0 # When z <= 0, you should set dz to 0 as well.
             ### END CODE HERE ###
             
             assert (dZ.shape == Z.shape)
@@ -118,7 +134,13 @@ class Activation():
             
             ### PASTE YOUR CODE HERE ###
             ### START CODE HERE ### 
-
+            def softmax(Z):
+                b = Z.max(axis=0)
+                exp = np.exp(Z - b)
+                return exp / exp.sum(axis=0)
+            Z = self.cache
+            s = softmax(Z)
+            dZ = s - Y
             ### END CODE HERE ###
             
             assert (dZ.shape == Z.shape)
