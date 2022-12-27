@@ -4,3 +4,4 @@ venv
 hw1_report.*
 !hw1_report.pdf
 !hw1_report.tex
+.DS_STORE
