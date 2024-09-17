@@ -1,0 +1,7 @@
+.ipynb_checkpoints
+.vscode
+.DS_Store
+*.pyc
+Testing_data
+Training_data
+picture
